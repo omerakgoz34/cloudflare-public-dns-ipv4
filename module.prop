@@ -1,0 +1,6 @@
+id=cloudflare-public-dns-ipv4
+name=Cloudflare Public DNS IPv4
+version=v1.0.0
+versionCode=10000
+author=omerakgoz34
+description=Systemless Cloudflare DNS for IPv4
