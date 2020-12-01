@@ -7,6 +7,12 @@
 MODDIR=${0%/*}
 
 # This script will be executed in late_start service mode
+if [ -a /system/etc/resolv.conf ]; then
+	mkdir -p $MODDIR/system/etc/
+	printf "nameserver 1.1.1.1\nnameserver 1.0.0.1" >> $MODDIR/system/etc/resolv.conf
+	chmod 644 $MODDIR/system/etc/resolv.conf
+fi
+
 iptables -t nat -A OUTPUT -p tcp --dport 53 -j DNAT --to-destination 1.1.1.1:53
 iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 1.0.0.1:53
 iptables -t nat -I OUTPUT -p tcp --dport 53 -j DNAT --to-destination 1.1.1.1:53
